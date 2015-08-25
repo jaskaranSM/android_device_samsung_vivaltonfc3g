@@ -25,8 +25,6 @@ BOARD_KERNEL_BASE := 0x81e00000
 BOARD_KERNEL_PAGESIZE := 4096
 TARGET_KERNEL_CONFIG := bcm21664_hawaii_ss_vivaltonfc3g_rev00_cm_defconfig
 TARGET_KERNEL_SOURCE := ../kernel/samsung/vivaltonfc3g
-KERNEL_TOOLCHAIN_PREFIX:=/home/nikiz/cm11/prebuilt/linux-x86/toolchains/arm-eabi-4.7/bin/arm-eabi-
-TARGET_KERNEL_CUSTOM_TOOLCHAIN := arm-eabi-4.7
 
 # PARTITION SIZE
 BOARD_BOOTIMAGE_PARTITION_SIZE := 8388608
