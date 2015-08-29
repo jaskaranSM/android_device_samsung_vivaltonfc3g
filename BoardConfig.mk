@@ -25,6 +25,8 @@ BOARD_KERNEL_BASE := 0x81e00000
 BOARD_KERNEL_PAGESIZE := 4096
 TARGET_KERNEL_CONFIG := bcm21664_hawaii_ss_vivaltonfc3g_rev00_cm_defconfig
 TARGET_KERNEL_SOURCE := ../kernel/samsung/vivaltonfc3g
+#KERNEL_TOOLCHAIN_PREFIX:=/opt/toolchains/linaro-4.9/bin/arm-eabi-
+#TARGET_KERNEL_CUSTOM_TOOLCHAIN := arm-eabi-linaro-4.9
 
 # PARTITION SIZE
 BOARD_BOOTIMAGE_PARTITION_SIZE := 8388608
@@ -128,7 +130,7 @@ BOARD_RIL_CLASS := ../../../device/samsung/vivaltonfc3g/ril/
 
 # Recovery
 #TARGET_RECOVERY_INITRC := 
-TARGET_RECOVERY_FSTAB := device/samsung/vivaltonfc3g/ramdisk/recovery.fstab
+TARGET_RECOVERY_FSTAB := device/samsung/vivaltonfc3g/ramdisk/fstab.hawaii_ss_vivaltonfc3g
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/class/android_usb/android0/f_mass_storage/lun%d/file"
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_HAS_LARGE_FILESYSTEM := true
