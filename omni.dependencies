@@ -1,0 +1,12 @@
+[
+	{
+		"remote": "github",
+		"repository": "omnirom/android_packages_apps_SamsungServiceMode",
+		"target_path": "packages/apps/SamsungServiceMode"
+	},
+	{
+		"remote": "github",
+		"repository": "omnirom/android_hardware_samsung",
+		"target_path": "hardware/samsung"
+	}
+]
