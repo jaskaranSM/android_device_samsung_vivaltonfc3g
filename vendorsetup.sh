@@ -1,3 +1,3 @@
 for i in eng userdebug user; do
-	add_lunch_combo cm_vivaltonfc3g-${i}
+	add_lunch_combo omni_vivaltonfc3g-${i}
 done
