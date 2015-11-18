@@ -29,7 +29,10 @@ PRODUCT_COPY_FILES += \
 	device/samsung/vivaltonfc3g/configs/bluetooth/bt_did.conf:system/etc/bluetooth/bt_did.conf \
 	device/samsung/vivaltonfc3g/configs/media_profiles.xml:system/etc/media_profiles.xml \
 	device/samsung/vivaltonfc3g/configs/audio_policy.conf:system/etc/audio_policy.conf \
-	device/samsung/vivaltonfc3g/configs/media_codecs.xml:system/etc/media_codecs.xml 
+	device/samsung/vivaltonfc3g/configs/media_codecs.xml:system/etc/media_codecs.xml \
+	device/samsung/vivaltonfc3g/configs/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf \
+	device/samsung/vivaltonfc3g/configs/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
+	device/samsung/vivaltonfc3g/configs/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf
 
 # Prebuilt kl keymaps
 PRODUCT_COPY_FILES += \

@@ -599,9 +599,6 @@ on property:ro.dumpstate.dmesg=1
     write /proc/sys/kernel/dmesg_restrict 0
 
 on charger
-    mount ext4 /dev/block/mmcblk0p17 /system ro wait noatime
-    exec sfsck /dev/block/mmcblk0p19 ext4
-    mount ext4 /dev/block/mmcblk0p19 /data wait nosuid nodev noatime discard,noauto_da_alloc,journal_async_commit
     write /sys/module/pwr_mgr/parameters/pm_late_init 1
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor interactive
     chown system system /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
@@ -621,4 +618,3 @@ on charger
     write /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay 6000
     write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 15000
     write /sys/devices/system/cpu/cpufreq/interactive/timer_rate 2000
-    class_start charger

@@ -418,6 +418,9 @@ on nonencrypted
     class_start late_start
 
 on charger
+    mount ext4 /dev/block/mmcblk0p17 /system ro wait noatime
+    exec sfsck /dev/block/mmcblk0p19 ext4
+    mount ext4 /dev/block/mmcblk0p19 /data wait nosuid nodev noatime discard,noauto_da_alloc,journal_async_commit
     class_start charger
 
 on property:vold.decrypt=trigger_reset_main
