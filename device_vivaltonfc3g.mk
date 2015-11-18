@@ -50,12 +50,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.ksm.default=1
 
 # Broadcom stuff
-ADDITIONAL_DEFAULT_PROPERTIES += \
-	persist.brcm.log=none \
-	persist.brcm.cp_crash=none \
-	persist.brcm.ap_crash=none \
-	persist.brcm.force_ramdump=0 \
-	persist.sys.usb.sport=1
+#ADDITIONAL_DEFAULT_PROPERTIES += \
+#	persist.brcm.log=none \
+#	persist.brcm.cp_crash=none \
+#	persist.brcm.ap_crash=none \
+#	persist.brcm.force_ramdump=0 \
+#	persist.sys.usb.sport=1
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
@@ -77,11 +77,10 @@ PRODUCT_PACKAGES += \
 	audio.usb.default \
 	audio_policy.hawaii \
 	libaudio-resampler \
-	libfmradio \
-	libanalogradiobroadcasting \
 	lights.hawaii \
 	libnetcmdiface \
-	audio.primary.default
+	audio.primary.default \
+	libstagefrighthw
 
 # Device-specific packages
 PRODUCT_PACKAGES += \
@@ -111,9 +110,6 @@ PRODUCT_COPY_FILES += \
 #PRODUCT_PACKAGES += \
 #	charger \
 #	charger_res_images
-
-#frameworks/native/data/etc/com.stericsson.hardware.fm.transmitter.xml:system/etc/permissions/com.stericsson.hardware.fm.transmitter.xml \
-#frameworks/native/data/etc/com.stericsson.hardware.fm.receiver.xml:system/etc/permissions/com.stericsson.hardware.fm.receiver.xml \
 
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
