@@ -15,21 +15,28 @@ DEVICE_PACKAGE_OVERLAYS += device/samsung/vivaltonfc3g/overlay
 # Init files
 PRODUCT_COPY_FILES += \
 	device/samsung/vivaltonfc3g/ramdisk/fstab.hawaii_ss_vivaltonfc3g:root/fstab.hawaii_ss_vivaltonfc3g \
-	device/samsung/vivaltonfc3g/ramdisk/init:root/init \
 	device/samsung/vivaltonfc3g/ramdisk/init.hawaii_ss_vivaltonfc3g.rc:root/init.hawaii_ss_vivaltonfc3g.rc \
 	device/samsung/vivaltonfc3g/ramdisk/init.hawaii_ss_vivaltonfc3g_base.rc:root/init.hawaii_ss_vivaltonfc3g_base.rc \
 	device/samsung/vivaltonfc3g/ramdisk/init.log.rc:root/init.log.rc \
 	device/samsung/vivaltonfc3g/ramdisk/init.rc:root/init.rc \
 	device/samsung/vivaltonfc3g/ramdisk/init.usb_hawaii_ss.rc:root/init.usb_hawaii_ss.rc \
 	device/samsung/vivaltonfc3g/ramdisk/init.wifi.rc:root/init.wifi.rc \
-	device/samsung/vivaltonfc3g/ramdisk/ueventd.hawaii_ss_vivaltonfc3g.rc:root/ueventd.hawaii_ss_vivaltonfc3g.rc
+	device/samsung/vivaltonfc3g/ramdisk/lpm.rc:root/lpm.rc \
+	device/samsung/vivaltonfc3g/ramdisk/ueventd.hawaii_ss_vivaltonfc3g.rc:root/ueventd.hawaii_ss_vivaltonfc3g # .rc was cut off, because ueventd only checks for < 32 char long filenames..
 
 # Audio config
 PRODUCT_COPY_FILES += \
-	device/samsung/vivaltonfc3g/configs/bluetooth/bt_did.conf:system/etc/bluetooth/bt_did.conf \
 	device/samsung/vivaltonfc3g/configs/media_profiles.xml:system/etc/media_profiles.xml \
 	device/samsung/vivaltonfc3g/configs/audio_policy.conf:system/etc/audio_policy.conf \
-	device/samsung/vivaltonfc3g/configs/media_codecs.xml:system/etc/media_codecs.xml \
+	device/samsung/vivaltonfc3g/configs/media_codecs.xml:system/etc/media_codecs.xml
+
+# Bluetooth config
+PRODUCT_COPY_FILES += \
+	device/samsung/vivaltonfc3g/configs/bluetooth/bt_did.conf:system/etc/bluetooth/bt_did.conf \
+	device/samsung/vivaltonfc3g/configs/bluetooth/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf
+
+# WiFi config
+PRODUCT_COPY_FILES += \
 	device/samsung/vivaltonfc3g/configs/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf \
 	device/samsung/vivaltonfc3g/configs/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
 	device/samsung/vivaltonfc3g/configs/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf
@@ -75,6 +82,7 @@ PRODUCT_PACKAGES += \
 
 # Misc other modules
 PRODUCT_PACKAGES += \
+    libbluetooth_jni \
 	audio.a2dp.default \
 	audio.r_submix.default \
 	audio.usb.default \
@@ -92,6 +100,9 @@ PRODUCT_PACKAGES += \
 
 # NFC packages
 PRODUCT_PACKAGES += \
+    libnfc-nci \
+    libnfc_nci_jni \
+    nfc.nci.hawaii \
     NfcNci \
     Tag \
     com.android.nfc_extras
@@ -145,6 +156,7 @@ PRODUCT_PACKAGES += \
 # Note that the only such settings should be the ones that are too low-level to
 # be reachable from resources or other mechanisms.
 PRODUCT_PROPERTY_OVERRIDES += \
+    cm.updater.uri=http://stableservers.eu/~jokurandom/CyanogenModOTA/api \
     wifi.interface=wlan0 \
     mobiledata.interfaces=rmnet0 \
     ro.telephony.ril_class=SamsungBCMRIL \
