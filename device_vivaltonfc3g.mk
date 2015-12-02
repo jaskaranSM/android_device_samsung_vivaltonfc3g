@@ -51,13 +51,20 @@ PRODUCT_COPY_FILES += \
 
 # Insecure ADBD
 # (ro.adb.secure=3)
-#ADDITIONAL_DEFAULT_PROPERTIES += \
-#	ro.adb.secure=0 \
-#	persist.service.adb.enable=1
+ADDITIONAL_DEFAULT_PROPERTIES += \
+	ro.adb.secure=0 \
+	persist.service.adb.enable=1
 
 # KSM
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.ksm.default=1
+    ro.ksm.default=1  
+   
+# Wi-Fi
+PRODUCT_PACKAGES += \
+       dhcpcd.conf \
+       hostapd \
+       wpa_supplicant \
+       wpa_supplicant.conf     
 
 # Broadcom stuff
 #ADDITIONAL_DEFAULT_PROPERTIES += \
@@ -118,7 +125,10 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.nfc.hce.xml:system/etc/permissions/android.hardware.nfc.hce.xml \
     device/samsung/vivaltonfc3g/nfc/libnfc-brcm.conf:system/etc/libnfc-brcm.conf \
     device/samsung/vivaltonfc3g/nfc/libnfc-brcm-20795a10.conf:system/etc/libnfc-brcm-20795a10.conf \
-    device/samsung/vivaltonfc3g/nfc/libnfc-sec.conf:system/etc/libnfc-sec.conf
+    device/samsung/vivaltonfc3g/nfc/libnfc-sec.conf:system/etc/libnfc-sec.conf \
+    frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml
 
 # Charger
 #PRODUCT_PACKAGES += \
@@ -132,6 +142,7 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
 	frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
 	frameworks/native/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
+	frameworks/native/data/etc/android.hardware.ethernet.xml:system/etc/permissions/android.hardware.ethernet.xml \
 	frameworks/native/data/etc/android.hardware.location.xml:system/etc/permissions/android.hardware.location.xml \
 	frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
 	frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.location.xml \
@@ -143,27 +154,19 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
 	frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
 	frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
-	frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
-	packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml
-	
-# Support for Browser's saved page feature. This allows
-# for pages saved on previous versions of the OS to be
-# viewed on the current OS.
-PRODUCT_PACKAGES += \
-    libskia_legacy
+	frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml
 
 # These are the hardware-specific settings that are stored in system properties.
 # Note that the only such settings should be the ones that are too low-level to
 # be reachable from resources or other mechanisms.
 PRODUCT_PROPERTY_OVERRIDES += \
-    cm.updater.uri=http://stableservers.eu/~jokurandom/CyanogenModOTA/api \
     wifi.interface=wlan0 \
     mobiledata.interfaces=rmnet0 \
     ro.telephony.ril_class=SamsungBCMRIL \
-    ro.zygote.disable_gl_preload=true \
     persist.radio.multisim.config=none \
     ro.cm.hardware.cabc=/sys/class/mdnie/mdnie/cabc \
     ro.telephony.call_ring.multiple=0 \
+    camera2.portability.force_api=1 \
     ro.telephony.call_ring=0
     
 # enable Google-specific location features,
@@ -194,7 +197,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 include frameworks/native/build/phone-hdpi-512-dalvik-heap.mk
 
 # we have enough storage space to hold precise GC data
-PRODUCT_TAGS += dalvik.gc.type-precise
+#PRODUCT_TAGS += dalvik.gc.type-precise
 
 $(call inherit-product, hardware/broadcom/wlan/bcmdhd/config/config-bcm.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
