@@ -89,16 +89,13 @@ PRODUCT_PACKAGES += \
 
 # Misc other modules
 PRODUCT_PACKAGES += \
-    libbluetooth_jni \
 	audio.a2dp.default \
+	audio.primary.default \
 	audio.r_submix.default \
 	audio.usb.default \
-	audio_policy.hawaii \
-	libaudio-resampler \
-	lights.hawaii \
 	libnetcmdiface \
-	audio.primary.default \
-	libstagefrighthw
+	libstagefrighthw \
+	lights.hawaii 
 
 # Device-specific packages
 PRODUCT_PACKAGES += \
@@ -125,7 +122,9 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.nfc.hce.xml:system/etc/permissions/android.hardware.nfc.hce.xml \
     device/samsung/vivaltonfc3g/nfc/libnfc-brcm.conf:system/etc/libnfc-brcm.conf \
     device/samsung/vivaltonfc3g/nfc/libnfc-brcm-20795a10.conf:system/etc/libnfc-brcm-20795a10.conf \
-    device/samsung/vivaltonfc3g/nfc/libnfc-sec.conf:system/etc/libnfc-sec.conf \
+    device/samsung/vivaltonfc3g/nfc/libnfc-sec.conf:system/etc/libnfc-sec.conf
+    
+PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml
@@ -201,10 +200,6 @@ include frameworks/native/build/phone-hdpi-512-dalvik-heap.mk
 
 $(call inherit-product, hardware/broadcom/wlan/bcmdhd/config/config-bcm.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
-
-ifeq ($(TARGET_BUILD_VARIANT),user)      
-else      
-endif
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 PRODUCT_NAME := full_vivaltonfc3g
