@@ -38,13 +38,6 @@ import java.util.ArrayList;
 public class SamsungBCMRIL extends RIL implements CommandsInterface {
 
     private static int sEnabledDataSimId = -1;
-    
-    private static final int RIL_REQUEST_DIAL_EMERGENCY = 10016;
-    private static final int RIL_UNSOL_RESPONSE_IMS_NETWORK_STATE_CHANGED = 1036;
-    private static final int RIL_UNSOL_DEVICE_READY_NOTI = 11008;
-    private static final int RIL_UNSOL_AM = 11010;
-    private static final int RIL_UNSOL_WB_AMR_STATE = 11017;
-    private static final int RIL_UNSOL_RESPONSE_HANDOVER = 11021;
 
     public SamsungBCMRIL(Context context, int networkMode, int cdmaSubscription) {
         this(context, networkMode, cdmaSubscription, null);
@@ -53,7 +46,7 @@ public class SamsungBCMRIL extends RIL implements CommandsInterface {
     public SamsungBCMRIL(Context context, int networkMode,
     		int cdmaSubscription, Integer instanceId) {
     	super(context, networkMode, cdmaSubscription, instanceId);
-        mQANElements = 5;
+        mQANElements = 6;
     }
 
     public void
@@ -144,29 +137,6 @@ public class SamsungBCMRIL extends RIL implements CommandsInterface {
 
     private void invokeOemRilRequestBrcm(byte key, byte value, Message response) {
         invokeOemRilRequestRaw(new byte[] { 'B', 'R', 'C', 'M', key, value }, response);
-    }
-
-	@Override
-    protected void
-    processUnsolicited (Parcel p) {
-        Object ret;
-        int dataPosition = p.dataPosition(); // save off position within the Parcel
-        int response = p.readInt();
-
-        switch(response) {
-            case RIL_UNSOL_RESPONSE_IMS_NETWORK_STATE_CHANGED: ret = responseVoid(p); break;
-            case RIL_UNSOL_DEVICE_READY_NOTI: ret = responseVoid(p); break;
-            case RIL_UNSOL_AM: ret = responseString(p); break;
-            case RIL_UNSOL_WB_AMR_STATE: ret = responseInts(p); break;
-            case RIL_UNSOL_RESPONSE_HANDOVER: ret = responseVoid(p); break;
-            default:
-                // Rewind the Parcel
-                p.setDataPosition(dataPosition);
-
-                // Forward responses that we are not overriding to the super class
-                super.processUnsolicited(p);
-                return;
-        }
     }
 
     protected RILRequest
@@ -393,7 +363,7 @@ public class SamsungBCMRIL extends RIL implements CommandsInterface {
             dc.isVoice = (0 == voiceSettings) ? false : true;
             //Some Samsung magic data for Videocalls
             // hack taken from smdk4210ril class
-            p.readInt();
+            voiceSettings = p.readInt();
             //printing it to cosole for later investigation
             Rlog.d(RILJ_LOG_TAG, "Samsung magic = " + voiceSettings);
             dc.isVoicePrivacy = (0 != p.readInt());
