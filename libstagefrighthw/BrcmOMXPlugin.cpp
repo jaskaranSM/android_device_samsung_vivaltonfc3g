@@ -37,7 +37,7 @@ BrcmOMXPlugin::BrcmOMXPlugin()
       mGetRolesOfComponentHandle(NULL) {
     if (mLibHandle != NULL) {
         mInit = (InitFunc)dlsym(mLibHandle, "OMX_Init");
-        mDeinit = (DeinitFunc)dlsym(mLibHandle, "OMX_Deinit");
+        mDeinit = (DeinitFunc)dlsym(mLibHandle, "OMX_DeInit");
 
         mComponentNameEnum =
             (ComponentNameEnumFunc)dlsym(mLibHandle, "OMX_ComponentNameEnum");
