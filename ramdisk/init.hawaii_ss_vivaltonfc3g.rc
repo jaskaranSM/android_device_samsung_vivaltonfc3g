@@ -2,4 +2,3 @@ import init.usb_hawaii_ss.rc
 import init.log.rc
 import init.hawaii_ss_vivaltonfc3g_base.rc
 import init.wifi.rc
-
