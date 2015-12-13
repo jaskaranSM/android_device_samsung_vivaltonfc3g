@@ -78,7 +78,7 @@ BOARD_EGL_WORKAROUND_BUG_10194508 := true
 TARGET_USES_ION := true
 HWUI_COMPILE_FOR_PERF := true
 #TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
-COMMON_GLOBAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS -DHAWAII_HWC
+COMMON_GLOBAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS -DHAWAII_HWC -DADD_LEGACY_ACQUIRE_BUFFER_SYMBOL
 
 # Include an expanded selection of fonts
 EXTENDED_FONT_FOOTPRINT := true
@@ -110,6 +110,11 @@ BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charg
 # healthd
 BOARD_HAL_STATIC_LIBRARIES := libhealthd-vivaltonfc3g.hawaii
 
+# Use the CM PowerHAL
+TARGET_USES_CM_POWERHAL := true
+CM_POWERHAL_EXTENSION := hawaii
+TARGET_POWERHAL_VARIANT = cm
+
 # RIL
 BOARD_RIL_CLASS := ../../../device/samsung/vivaltonfc3g/ril/
 
@@ -126,6 +131,7 @@ BOARD_RECOVERY_HANDLES_MOUNT := true
 BOARD_USES_MMCUTILS := false
 BOARD_RECOVERY_ALWAYS_WIPES := false
 BOARD_SUPPRESS_EMMC_WIPE := true
+TARGET_RECOVERY_DENSITY := hdpi
 
 # CMHW
 BOARD_HARDWARE_CLASS := hardware/samsung/cmhw/ device/samsung/vivaltonfc3g/cmhw/
@@ -146,7 +152,6 @@ BOARD_SEPOLICY_DIRS += \
 BOARD_SEPOLICY_UNION += \
     file_contexts \
     property_contexts \
-    service_contexts \
     bkmgrd.te \
     device.te \
     surfaceflinger.te \

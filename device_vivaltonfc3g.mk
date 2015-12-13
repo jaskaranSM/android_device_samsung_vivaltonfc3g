@@ -24,11 +24,14 @@ PRODUCT_COPY_FILES += \
 	device/samsung/vivaltonfc3g/ramdisk/lpm.rc:root/lpm.rc \
 	device/samsung/vivaltonfc3g/ramdisk/ueventd.hawaii_ss_vivaltonfc3g.rc:root/ueventd.hawaii_ss_vivaltonfc3g # .rc was cut off, because ueventd only checks for < 32 char long filenames..
 
-# Audio config
+# Media config
 PRODUCT_COPY_FILES += \
 	device/samsung/vivaltonfc3g/configs/media_profiles.xml:system/etc/media_profiles.xml \
 	device/samsung/vivaltonfc3g/configs/audio_policy.conf:system/etc/audio_policy.conf \
-	device/samsung/vivaltonfc3g/configs/media_codecs.xml:system/etc/media_codecs.xml
+	device/samsung/vivaltonfc3g/configs/media_codecs.xml:system/etc/media_codecs.xml \
+	frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml
 
 # Bluetooth config
 PRODUCT_COPY_FILES += \
@@ -123,11 +126,6 @@ PRODUCT_COPY_FILES += \
     device/samsung/vivaltonfc3g/nfc/libnfc-brcm.conf:system/etc/libnfc-brcm.conf \
     device/samsung/vivaltonfc3g/nfc/libnfc-brcm-20795a10.conf:system/etc/libnfc-brcm-20795a10.conf \
     device/samsung/vivaltonfc3g/nfc/libnfc-sec.conf:system/etc/libnfc-sec.conf
-    
-PRODUCT_COPY_FILES += \
-    frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
-    frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
-    frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml
 
 # Charger
 #PRODUCT_PACKAGES += \
@@ -167,36 +165,15 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.call_ring.multiple=0 \
     camera2.portability.force_api=1 \
     ro.telephony.call_ring=0
-    
-# enable Google-specific location features,
-# like NetworkLocationProvider and LocationCollector
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.com.google.locationfeatures=1 \
-    ro.com.google.networklocation=1
-
-# Extended JNI checks
-# The extended JNI checks will cause the system to run more slowly, but they can spot a variety of nasty bugs 
-# before they have a chance to cause problems.
-# Default=true for development builds, set by android buildsystem.
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.kernel.android.checkjni=0 \
-    dalvik.vm.checkjni=false
 
 # MTP
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp
-	
-# Override phone-hdpi-512-dalvik-heap to match value on stock
-# - helps pass CTS com.squareup.okhttp.internal.spdy.Spdy3Test#tooLargeDataFrame)
-# (property override must come before included property)
-PRODUCT_PROPERTY_OVERRIDES += \
-	dalvik.vm.heapgrowthlimit=56m	
 
 # Dalvik heap config
+#include frameworks/native/build/phone-hdpi-512-dalvik-heap.mk
 include frameworks/native/build/phone-hdpi-512-dalvik-heap.mk
-
-# we have enough storage space to hold precise GC data
-#PRODUCT_TAGS += dalvik.gc.type-precise
+include frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk
 
 $(call inherit-product, hardware/broadcom/wlan/bcmdhd/config/config-bcm.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)

@@ -217,6 +217,8 @@ on fs
     mkdir /preload 0771 system system
 
     mount_all /fstab.hawaii_ss_vivaltonfc3g
+    swapon_all /fstab.hawaii_ss_vivaltonfc3g
+    
 # Temporary hack for root access
     chmod 6755 /system/xbin/su
 
@@ -362,6 +364,10 @@ on fs
 # Permissions for System Server and daemons.
     chown system system /sys/devices/platform/panel/backlight/panel/brightness
 
+on post-fs  
+   # Force kernel read only 1 page at a time
+   write /proc/sys/vm/page-cluster 0
+
 on post-fs-data
 # SA, System SW, SAMSUNG create log directory
     mkdir /data/log 0775 system log
@@ -478,12 +484,6 @@ service usb_portd /system/bin/usb_portd
     user system
     group input vpn net_admin net_raw radio system sdcard_rw
 
-# Run atxd daemon, which needs group permissions to run in non-root mode.
-service atxd /system/bin/atxd
-    class main
-    user shell
-    group input vpn net_admin net_raw radio system sdcard_rw log
-
 # Run usbdev_mode to set USB configuration from uboot if bootargs usbdev_mode option is set.
 service usbdev_mode /system/bin/usbdev_mode
     class main
@@ -520,10 +520,12 @@ service watchdogd /system/bin/watchdogd
 # virtual sdcard daemon running as media_rw (1023)
 service sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emulated
     class late_start
+    oneshot
 
 service fuse_extSdCard /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/extSdCard /storage/extSdCard
     class late_start
     disabled
+    oneshot
 
 on property:vold.decrypt=trigger_restart_framework
     setprop ro.fuse_sdcard ${persist.fuse_sdcard}
@@ -596,4 +598,4 @@ service iprenew_bt-pan /system/bin/dhcpcd -n
     oneshot
 
 on property:ro.dumpstate.dmesg=1
-    write /proc/sys/kernel/dmesg_restrict 0
+    write /proc/sys/kernel/dmesg_restrict 1

@@ -1,0 +1,31 @@
+diff --git a/include/tinyalsa/asoundlib.h b/include/tinyalsa/asoundlib.h
+index 809e02d..b061e04 100644
+--- a/include/tinyalsa/asoundlib.h
++++ b/include/tinyalsa/asoundlib.h
+@@ -237,6 +237,7 @@ int pcm_mmap_commit(struct pcm *pcm, unsigned int offset, unsigned int frames);
+ int pcm_prepare(struct pcm *pcm);
+ /* Start and stop a PCM channel that doesn't transfer data */
+ int pcm_start(struct pcm *pcm);
++int pcm_drain(struct pcm *pcm);
+ int pcm_stop(struct pcm *pcm);
+ 
+ /* ioctl function for PCM driver */
+diff --git a/pcm.c b/pcm.c
+index d8af58a..6497606 100644
+--- a/pcm.c
++++ b/pcm.c
+@@ -1027,6 +1027,14 @@ int pcm_start(struct pcm *pcm)
+     return 0;
+ }
+ 
++int pcm_drain(struct pcm *pcm)
++{
++    if (ioctl(pcm->fd, SNDRV_PCM_IOCTL_DRAIN) < 0)
++        return oops(pcm, errno, "drain failed");
++
++    return 0;
++}
++
+ int pcm_stop(struct pcm *pcm)
+ {
+     if (ioctl(pcm->fd, SNDRV_PCM_IOCTL_DROP) < 0)
