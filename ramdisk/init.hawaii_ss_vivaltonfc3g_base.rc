@@ -60,6 +60,9 @@ on boot
 # Changing secheduler to noop
     write /sys/block/mmcblk0/queue/scheduler noop
 
+# TODO: FIX THIS!
+	write /sys/fs/selinux/enforce 0
+
 # Permissions for Camera
     chown system radio /sys/class/camera/rear/rear_camfw
     chown system radio /sys/class/camera/rear/rear_camtype
