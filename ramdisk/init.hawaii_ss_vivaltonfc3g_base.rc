@@ -10,7 +10,6 @@ on early-init
 
 on init
     stop ril-daemon
-    stop auditd
 
     mkdir /cache 0000 system system
     loglevel 7
@@ -440,17 +439,7 @@ service lpm /system/bin/lpm
 ## Daemon processes to be run by init.
 ##
 
-on property:ro.debuggable=1
-    start console
-
-# Run at_distributor
-service at_distributor /system/bin/at_distributor
-#    class late_start
-    class main
-    user root
-    group radio misc log
-
-service hawaii-rild /system/bin/rild
+service ril-daemon /system/bin/rild
     class main
     socket rild stream 660 root radio
     socket rild1 stream 660 root radio
@@ -463,52 +452,12 @@ service gpsd /system/bin/glgps -c /system/etc/gps/glconfig.xml
     user gps
     group system root inet radio wifi sdcard_rw
 
-# Run ATX over UART
-service console /system/bin/atx -l -d
-    class late_start
-    console
-#    oneshot
-    user system
-    group vpn net_admin net_raw radio system sdcard_rw log mount
-    
-service hawaii-auditd /system/bin/auditd -k
-    class main
-    seclabel u:r:hawaii-auditd:s0
-    disabled
-    oneshot
-        
-# Run usb_portd to automatically launch atx when USB configuration changes.
-service usb_portd /system/bin/usb_portd
-    class main
-#    oneshot
-    user system
-    group input vpn net_admin net_raw radio system sdcard_rw
-
-# Run usbdev_mode to set USB configuration from uboot if bootargs usbdev_mode option is set.
-service usbdev_mode /system/bin/usbdev_mode
-    class main
-    oneshot
-    user system
-    group radio system
-
 # Run bkmgrd automatically on startup
 service bkmgrd /system/bin/bkmgrd
     class main
     oneshot
     user root
     group radio system log
-
-service set_simid /system/bin/atx --fordev=ACM --runcmd=/data/atx/setsim.txt
-    disabled
-    oneshot
-    user system
-    group input vpn net_admin net_raw radio system sdcard_rw log mount
-
-# When the default SIM for data connections is updated,
-# also update the DUN AT channel with the default SIM.
-on property:persist.sys.dataprefer.simid=0
-    write /data/atx/setsim.txt at*msetsim=1
-    start set_simid
 
 #start watchdog daemon
 service watchdogd /system/bin/watchdogd
@@ -529,25 +478,6 @@ service fuse_extSdCard /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/extSd
 
 on property:vold.decrypt=trigger_restart_framework
     setprop ro.fuse_sdcard ${persist.fuse_sdcard}
-
-# Runtime Compcache
-service rtccd /system/bin/rtccd3 -a 128M
-    class core
-    user root
-    oneshot
-
-# Run the script to rename the panic logs
-service apanic_rename /system/bin/sh /system/etc/apanic_rename.sh
-    class main
-    user root
-    group log sdcard_rw
-    oneshot
-
-service copy_cp_imgs /system/bin/sh /system/etc/copy_cp_imgs.sh
-    class main
-    oneshot
-    user root
-    disabled
 
 on property:ril.boot_completed=1
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor interactive
@@ -573,18 +503,10 @@ on property:dev.bootcomplete=1
     chmod 660 /sys/devices/system/cpu/cpufreq/interactive/min_sample_time
     chmod 660 /sys/devices/system/cpu/cpufreq/interactive/timer_rate
     chmod 220 /sys/devices/system/cpu/cpufreq/interactive/boostpulse
-    start copy_cp_imgs
-    start hawaii-auditd
 
 # change dirty_bytes and dirty_background_bytes for 4GB TLC memory
     write proc/sys/vm/dirty_bytes 14680064
     write proc/sys/vm/dirty_background_bytes 2097152
-
-service bugreport /system/bin/bugmailer.sh -v
-    class main
-    disabled
-    oneshot
-    keycodes 114 115 116
 
 # for BT-PANU
 service dhcpcd_bt-pan /system/bin/dhcpcd -BKL
