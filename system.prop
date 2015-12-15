@@ -7,20 +7,6 @@ ro.sf.lcd_density=240
 ro.lcd_brightness=160
 ro.lcd_min_brightness=20
 
-#Simulate sdcard on /data/media
-#
-persist.fuse_sdcard=true
-
-#turn off TREQ
-#persist.audio.pcmout1.sweq=OFF
-#persist.audio.pcmout2.sweq=OFF
-
-#Enable MM Logging
-#debug.brcm.mm.logs=1
-
-# System property for Font Clarity
-#persist.sys.font_clarity=0
-
 # MultiTouch support
 ro.product.multi_touch_enabled=true
 ro.product.max_num_touch=2
@@ -35,4 +21,4 @@ brcm.hwc.no-hdmi-trans=1
 ro.ril.hsxpa=1
 ro.ril.gprsclass=10
 persist.sys.dataprefer.simid=0
-ro.com.google.gmsversion=4.4.4_r2
+ro.com.google.gmsversion=4.4_r5
