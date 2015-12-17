@@ -89,14 +89,6 @@ BOARD_USE_BGRA_8888 := true
 # Audio
 BOARD_USES_ALSA_AUDIO := true
 
-# Enable dex-preoptimization to speed up the first boot sequence
-# of an SDK AVD. Note that this operation only works on Linux for now
-ifeq ($(HOST_OS),linux)
-  ifeq ($(WITH_DEXPREOPT),)
-    WITH_DEXPREOPT := true
-  endif
-endif
-
 # Bootanimation
 TARGET_BOOTANIMATION_PRELOAD := true
 TARGET_BOOTANIMATION_TEXTURE_CACHE := true
@@ -116,6 +108,7 @@ CM_POWERHAL_EXTENSION := hawaii
 TARGET_POWERHAL_VARIANT = cm
 
 # RIL
+BOARD_PROVIDES_LIBRIL := true
 BOARD_RIL_CLASS := ../../../device/samsung/vivaltonfc3g/ril/
 
 # Recovery

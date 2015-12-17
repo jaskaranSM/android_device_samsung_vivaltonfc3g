@@ -41,7 +41,6 @@ PRODUCT_COPY_FILES += \
 # WiFi config
 PRODUCT_COPY_FILES += \
 	device/samsung/vivaltonfc3g/configs/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf \
-	device/samsung/vivaltonfc3g/configs/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
 	device/samsung/vivaltonfc3g/configs/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf
 
 # Prebuilt kl keymaps

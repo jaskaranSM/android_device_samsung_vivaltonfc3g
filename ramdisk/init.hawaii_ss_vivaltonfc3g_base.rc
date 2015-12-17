@@ -9,8 +9,6 @@ on early-init
     mount debugfs /sys/kernel/debug /sys/kernel/debug
 
 on init
-    stop ril-daemon
-
     mkdir /cache 0000 system system
     loglevel 7
     mkdir /efs 0771 radio system
@@ -213,6 +211,9 @@ on boot
 
 # SEC_PRODUCT_FEATURE_COMMON_USE_MULTISIM
     setprop ro.multisim.simslotcount 1
+
+# Prevents permission denied error for telephony
+    chmod 0644 /proc/cmdline
 
 on fs
 # Support Preload install apks

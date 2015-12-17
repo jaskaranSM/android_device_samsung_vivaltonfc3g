@@ -87,7 +87,6 @@ lib/librpc.so
 lib/libsamsungRecord.so
 lib/libsamsungSoundbooster.so
 lib/libsecnativefeature.so
-lib/libsecril-client.so
 lib/libsoc.so
 lib/libsrc_haze_removal_preview.so
 lib/libsomxaacd.so
