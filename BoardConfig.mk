@@ -25,7 +25,7 @@ TARGET_OTA_ASSERT_DEVICE := vivaltonfc3g,G313HN,SM-G313HN,hawaii
 BOARD_KERNEL_BASE := 0x81e00000
 BOARD_KERNEL_PAGESIZE := 4096
 TARGET_KERNEL_CONFIG := bcm21664_hawaii_ss_vivaltonfc3g_rev00_cm_defconfig
-TARGET_KERNEL_SOURCE := ../kernel/samsung/hawaii
+#TARGET_KERNEL_SOURCE := ../kernel/samsung/hawaii
 TARGET_PREBUILT_KERNEL := device/samsung/vivaltonfc3g/kernel
 
 # PARTITION SIZE
@@ -37,9 +37,9 @@ BOARD_CACHEIMAGE_PARTITION_SIZE := 209715200
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 
 # Vivaltonfc3g needs this in the boot image
-BOARD_MKBOOTIMG_ARGS := --second $(OUT)/obj/KERNEL_OBJ/arch/arm/boot/dts/hawaii_ss_vivaltonfc3g_rev00.dtb
+#BOARD_MKBOOTIMG_ARGS := --second $(OUT)/obj/KERNEL_OBJ/arch/arm/boot/dts/hawaii_ss_vivaltonfc3g_rev00.dtb
 # Use this if you use a prebuilt kernel
-#BOARD_MKBOOTIMG_ARGS := --second device/samsung/vivaltonfc3g/second.bin
+BOARD_MKBOOTIMG_ARGS := --second device/samsung/vivaltonfc3g/second.bin
 
 # FLASH BLOCK SIZE (BOARD_KERNEL_PAGESIZE * 64)
 BOARD_FLASH_BLOCK_SIZE := 262144
@@ -108,7 +108,6 @@ CM_POWERHAL_EXTENSION := hawaii
 TARGET_POWERHAL_VARIANT = cm
 
 # RIL
-BOARD_PROVIDES_LIBRIL := true
 BOARD_RIL_CLASS := ../../../device/samsung/vivaltonfc3g/ril/
 
 # Recovery
