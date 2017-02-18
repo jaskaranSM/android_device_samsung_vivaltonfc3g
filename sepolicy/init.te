@@ -1,4 +1,4 @@
-# chmod in init.hawaii_ss_loganxx.rc (for bkmgrd)
+# chmod in init.{$ro.hardware}.rc (for bkmgrd)
 allow init block_device:blk_file setattr;
 allow init radio_device:blk_file setattr;
 
