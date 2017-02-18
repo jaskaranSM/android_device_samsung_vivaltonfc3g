@@ -6,7 +6,6 @@ on early-init
 
 on init
     
-    symlink /sdcard /mnt/sdcard
     symlink /sdcard /storage/sdcard0
 
     symlink /efs /factory
@@ -134,7 +133,6 @@ on boot
     setprop ro.build.product hawaii
     setprop ro.product.device hawaii
 
-    mount debugfs /sys/kernel/debug /sys/kernel/debug
 
 # WIFI
     setprop wifi.interface wlan0
