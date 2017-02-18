@@ -23,7 +23,7 @@ TARGET_OTA_ASSERT_DEVICE := logan,S7270,GT-S7270,hawaii
 # Kernel
 BOARD_KERNEL_BASE := 0x82000000
 BOARD_KERNEL_PAGESIZE := 4096
-TARGET_KERNEL_CONFIG := bcm21664_hawaii_ss_logan_rev03_cm_defconfig
+TARGET_KERNEL_CONFIG := bcm21664_hawaii_ss_logan_rev03_lineage_defconfig
 TARGET_KERNEL_SOURCE := kernel/samsung/loganxx
 
 # Kernel toolchain
