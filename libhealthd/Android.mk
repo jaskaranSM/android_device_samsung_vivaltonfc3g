@@ -17,7 +17,7 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 LOCAL_SRC_FILES := healthd-hawaii.cpp
-LOCAL_MODULE := libhealthd.hawaii
+LOCAL_MODULE := libhealthd-vivaltonfc3g.hawaii
 LOCAL_MODULE_TAGS := optional
 LOCAL_STATIC_LIBRARIES := libhealthd.default
 include $(BUILD_STATIC_LIBRARY)
