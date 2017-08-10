@@ -1,4 +1,4 @@
-# Device tree for Samsung Galaxy Ace 3 GT-S7270 (1 SIM) (logan)
+# Device tree for Samsung Galaxy Trend 2 SM-G313HN (1 SIM) (vivaltonfc3g)
 
 ### Specs (Physically inspected):
   - CPU: Cortex-A9 (Little endian, Dual Core)
