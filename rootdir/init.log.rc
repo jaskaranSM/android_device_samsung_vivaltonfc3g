@@ -110,4 +110,3 @@ on property:brcm.ase.file_max_save=1
 
 on property:persist.brcm.log_file_max=*
     write /sys/class/bcm_log/bcm_log/file_max ${persist.brcm.log_file_max}
-
