@@ -1,5 +1,5 @@
 # Inherit from the proprietary version
--include vendor/samsung/logan/BoardConfigVendor.mk
+-include vendor/samsung/vivaltonfc3g/BoardConfigVendor.mk
 
 # Platform
 TARGET_ARCH                                 := arm
@@ -15,25 +15,25 @@ ARCH_ARM_HAVE_VFP                           := true
 ARCH_ARM_HAVE_TLS_REGISTER                  := true
 ARCH_ARM_HAVE_NEON                          := true
 TARGET_BOOTLOADER_BOARD_NAME                := hawaii
-TARGET_GLOBAL_CFLAGS                        += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp -O3 -funsafe-math-optimizations
-TARGET_GLOBAL_CPPFLAGS                      += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp -O3 -funsafe-math-optimizations
-
+TARGET_GLOBAL_CFLAGS                        += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
+TARGET_GLOBAL_CPPFLAGS                      += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
+BOARD_VENDOR                                := samsung
 # Assert
-TARGET_OTA_ASSERT_DEVICE                    := logan,S7580,GT-S7580,hawaii
+TARGET_OTA_ASSERT_DEVICE                    := vivaltonfc3g,G313GN,SM-G131HN,hawaii
 
 # Kernel
 BOARD_MKBOOTIMG_ARGS                        := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100
-BOARD_KERNEL_BASE                           := 0x82000000
+BOARD_KERNEL_BASE                           := 0x81e00000
 BOARD_KERNEL_PAGESIZE                       := 4096
 BOARD_KERNEL_OFFSET                         := 0x00008000
 BOARD_RAMDISK_OFFSET                        := 0x01000000
 BOARD_KERNEL_TAGS_OFFSET                    := 0x00000100
 ifeq ($(BUILD_TWRP),true)
-    TARGET_KERNEL_CONFIG                    := bcm21664_hawaii_ss_loganxx_rev00_recovery_defconfig
+    TARGET_KERNEL_CONFIG                    := bcm21664_hawaii_ss_vivaltonfc3g_rev00_defconfig
 else
-    TARGET_KERNEL_CONFIG                    := bcm21664_hawaii_ss_logan_rev03_lineage_defconfig
+    TARGET_KERNEL_CONFIG                    := bcm21664_hawaii_ss_vivaltonfc3g_rev00_lineage_defconfig
 endif
-TARGET_KERNEL_SOURCE                        := kernel/samsung/loganxx
+TARGET_KERNEL_SOURCE                        := kernel/samsung/vivaltonfc3g
 
 # Kernel toolchain
 KERNEL_TOOLCHAIN                            := $(ANDROID_BUILD_TOP)/prebuilts/gcc/linux-x86/arm/arm-eabi-4.7/bin
@@ -47,24 +47,28 @@ TARGET_KERNEL_HAVE_NTFS                     := true
 BOARD_BOOTIMAGE_PARTITION_SIZE              := 8388608
 # //Fake Values to workaround build
 BOARD_RECOVERYIMAGE_PARTITION_SIZE          := 10279424
-BOARD_SYSTEMIMAGE_PARTITION_SIZE            := 1210769408
+BOARD_SYSTEMIMAGE_PARTITION_SIZE            := 1161543680
 # //
 BOARD_SYSTEMIMAGE_JOURNAL_SIZE              := 0
-BOARD_USERDATAIMAGE_PARTITION_SIZE          := 2373976064
+BOARD_USERDATAIMAGE_PARTITION_SIZE          := 2424307712
 BOARD_CACHEIMAGE_PARTITION_SIZE             := 209715200
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE           := ext4
+# Vivaltonfc3g needs this in the boot image
+#BOARD_MKBOOTIMG_ARGS := --second $(OUT)/obj/KERNEL_OBJ/arch/arm/boot/dts/hawaii_ss_vivaltonfc3g_rev00.dtb
+# Use this if you use a prebuilt kernel
+BOARD_MKBOOTIMG_ARGS := --second device/samsung/vivaltonfc3g/second.bin
 BOARD_FLASH_BLOCK_SIZE                      := 262144
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH                        := true
 BOARD_HAVE_BLUETOOTH_BCM                    := true
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/logan/bluetooth
-BOARD_CUSTOM_BT_CONFIG                      := device/samsung/logan/bluetooth/libbt_vndcfg.txt
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/vivaltonfc3g/bluetooth
+BOARD_CUSTOM_BT_CONFIG                      := device/samsung/vivaltonfc3g/bluetooth/libbt_vndcfg_g313hn.txt
 
 # Connectivity - Wi-Fi
 BOARD_HAVE_SAMSUNG_WIFI                     := true
 BOARD_WLAN_DEVICE                           := bcmdhd
-BOARD_WLAN_DEVICE_REV                       := bcm4330_b1
+BOARD_WLAN_DEVICE_REV                       := bcm4343
 WPA_BUILD_SUPPLICANT                        := true
 BOARD_WPA_SUPPLICANT_DRIVER                 := NL80211
 WPA_SUPPLICANT_VERSION                      := VER_0_8_X
@@ -75,10 +79,8 @@ WIFI_DRIVER_FW_PATH_PARAM                   := "/sys/module/dhd/parameters/firmw
 WIFI_DRIVER_FW_PATH_STA                     := "/system/etc/wifi/bcmdhd_sta.bin"
 WIFI_DRIVER_FW_PATH_AP                      := "/system/etc/wifi/bcmdhd_apsta.bin"
 WIFI_DRIVER_FW_PATH_P2P                     := "/system/etc/wifi/bcmdhd_p2p.bin"
-WIFI_DRIVER_MODULE_PATH                     := "/system/lib/modules/dhd.ko"
-WIFI_DRIVER_MODULE_NAME                     := "dhd"
-WIFI_DRIVER_MODULE_ARG                      := "firmware_path=/system/etc/wifi/bcmdhd_sta.bin nvram_path=/system/etc/wifi/nvram_net.txt"
-WIFI_DRIVER_MODULE_AP_ARG                   := "firmware_path=/system/etc/wifi/bcmdhd_apsta.bin nvram_path=/system/etc/wifi/nvram_net.txt"
+WIFI_DRIVER_NVRAM_PATH_PARAM                := "/sys/module/dhd/parameters/nvram_path"
+WIFI_DRIVER_NVRAM_PATH                      := "/system/etc/wifi/nvram_net.txt"
 WIFI_BAND                                   := 802_11_ABG
 
 # LightHAL
@@ -96,6 +98,9 @@ BOARD_GLOBAL_CFLAGS                         += -DNEEDS_VECTORIMPL_SYMBOLS -DHAWA
 TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK       := true
 TARGET_FORCE_HWC_FOR_VIRTUAL_DISPLAYS       := true
 
+# Include an expanded selection of fonts
+EXTENDED_FONT_FOOTPRINT := true
+
 # External apps on SD
 TARGET_EXTERNAL_APPS                        := sdcard1
 
@@ -110,12 +115,14 @@ TARGET_BOOTANIMATION_TEXTURE_CACHE          := true
 # Charger
 BOARD_CHARGING_MODE_BOOTING_LPM             := /sys/class/power_supply/battery/batt_lp_charging
 BOARD_CHARGER_ENABLE_SUSPEND                := true
+BOARD_ALLOW_SUSPEND_IN_CHARGER              := true
+#BOARD_BATTERY_DEVICE_NAME := "battery"
 
 # libhealthd
-BOARD_HAL_STATIC_LIBRARIES                  := libhealthd.hawaii
+BOARD_HAL_STATIC_LIBRARIES                  := libhealthd-vivaltonfc3g.hawaii
 
 # RIL
-BOARD_RIL_CLASS                             := ../../../device/samsung/logan/ril/
+BOARD_RIL_CLASS                             := ../../../device/samsung/vivaltonfc3g/ril/
 BOARD_GLOBAL_CFLAGS                         += -DDISABLE_ASHMEM_TRACKING
 
 # Camera
@@ -130,9 +137,9 @@ MALLOC_SVELTE                               := true
 # Recovery
 # Compile with BUILD_TWRP=true when build TWRP recovery
 ifeq ($(BUILD_TWRP),true)
-    TARGET_RECOVERY_FSTAB                   := device/samsung/logan/rootdir/twrp.fstab.hawaii_ss_logan
+    TARGET_RECOVERY_FSTAB                   := device/samsung/vivaltonfc3g/rootdir/twrp.fstab.hawaii_ss_vivaltonfc3g
 else
-    TARGET_RECOVERY_FSTAB                   := device/samsung/logan/rootdir/fstab.hawaii_ss_logan
+    TARGET_RECOVERY_FSTAB                   := device/samsung/vivaltonfc3g/rootdir/fstab.hawaii_ss_vivaltonfc3g
 endif
 TARGET_USE_CUSTOM_LUN_FILE_PATH             := /sys/class/android_usb/android0/f_mass_storage/lun/file
 TARGET_USERIMAGES_USE_EXT4                  := true
@@ -140,7 +147,7 @@ TARGET_USERIMAGES_USE_F2FS                  := true
 TARGET_RECOVERY_PIXEL_FORMAT                := BGRA_8888
 BOARD_HAS_NO_MISC_PARTITION                 := true
 BOARD_RECOVERY_HANDLES_MOUNT                := true
-BOARD_USES_MMCUTILS                         := true
+BOARD_USES_MMCUTILS                         := false
 BOARD_USE_USB_MASS_STORAGE_SWITCH           := true
 BOARD_SUPPRESS_EMMC_WIPE                    := true
 TARGET_RECOVERY_DENSITY                     := hdpi
@@ -177,8 +184,14 @@ BOARD_MTP_DEVICE                            := /dev/mtp_usb
 BOARD_HARDWARE_CLASS                        := hardware/samsung/cmhw/
 
 # GPS
-TARGET_SPECIFIC_HEADER_PATH                 := device/samsung/logan/include
+TARGET_SPECIFIC_HEADER_PATH                 := device/samsung/vivaltonfc3g/include
+
+# Compat
+TARGET_USES_LOGD := false
+
+# jemalloc causes a lot of random crash on free()
+#MALLOC_IMPL := dlmalloc
 
 # SELinux
 BOARD_SEPOLICY_DIRS += \
-    device/samsung/logan/sepolicy
+    device/samsung/vivaltonfc3g/sepolicy
