@@ -1,4 +1,4 @@
-# Device tree for Samsung Galaxy Trend 2 SM-G313HN (1 SIM) (vivaltonfc3g)
+# Device tree for Samsung Galaxy Trend 2 SM-G313HN (vivaltonfc3g)
 
 ### Specs (Physically inspected):
   - CPU: Cortex-A9 (Little endian, Dual Core)
