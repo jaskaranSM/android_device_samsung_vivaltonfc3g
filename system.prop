@@ -1,5 +1,5 @@
 #
-# LOGAN (GT-S7270)
+# VIVALTONFC3G (SM-G313HN)
 #
 
 persist.brcm.log=none
@@ -13,6 +13,10 @@ persist.radio.flexmap_type=nw_mode
 ro.sf.lcd_density=240
 ro.lcd_brightness=160
 ro.lcd_min_brightness=18
+
+#Simulate sdcard on /data/media
+#
+persist.fuse_sdcard=true
 
 # MultiTouch support
 ro.product.multi_touch_enabled=true
@@ -34,7 +38,7 @@ video.enc.h264.timing_thr2=145
 
 ro.ril.hsxpa=1
 ro.ril.gprsclass=10
-ro.com.google.gmsversion=4.1_r4
+ro.com.google.gmsversion=4.4_r5
 
 ro.config.max_starting_bg=8
 dalvik.vm.dex2oat-swap=false
