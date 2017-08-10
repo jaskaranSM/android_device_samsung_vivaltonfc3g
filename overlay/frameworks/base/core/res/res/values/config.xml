@@ -175,9 +175,10 @@
              4 - Menu
              8 - Assistant (search)
             16 - App switch
+            64 - Volume rocker
          For example, a device with Home, Back and Menu keys would set this
          config to 7. -->
-    <integer name="config_deviceHardwareKeys">7</integer>
+    <integer name="config_deviceHardwareKeys">83</integer>
 
     <!-- Hardware keys present on the device with the ability to wake, stored as a bit field.
          This integer should equal the sum of the corresponding value for each
@@ -213,6 +214,9 @@
     <!-- If true, the doze component is not started until after the screen has been
          turned off and the screen off animation has been performed. -->
     <bool name="config_dozeAfterScreenOff">true</bool>
+    
+    	<!-- Is the device LTE capable -->
+    <bool name="config_lte_capable">false</bool>
 
     <!-- Dream of notifications -->
     <bool name="config_powerDecoupleInteractiveModeFromDisplay">true</bool>
