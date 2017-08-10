@@ -17,6 +17,6 @@
 #ifndef _BDROID_BUILDCFG_H
 #define _BDROID_BUILDCFG_H
 
-#define BTM_DEF_LOCAL_NAME   "GT-S7270"
+#define BTM_DEF_LOCAL_NAME   "SM-G313HN"
 
 #endif
