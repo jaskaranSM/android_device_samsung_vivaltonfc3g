@@ -35,15 +35,15 @@ PRODUCT_COPY_FILES += \
 
 # Prebuilt kl keymaps
 PRODUCT_COPY_FILES += \
-	#device/samsung/vivaltonfc3g/keylayouts/bcm_headset.kl:system/usr/keylayout/bcm_headset.kl \
-	#device/samsung/vivaltonfc3g/keylayouts/bcm_keypad_v2.kl:system/usr/keylayout/bcm_keypad_v2.kl \
-	#device/samsung/vivaltonfc3g/keylayouts/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
-        #device/samsung/vivaltonfc3g/keylayouts/samsung-keypad.kl:system/usr/keylayout/samsung-keypad.kl
-	device/samsung/vivaltonfc3g/keylayouts/bcm_headset.kl:system/usr/keylayout/bcm_headset.kl \
- 	device/samsung/vivaltonfc3g/keylayouts/bcm_keypad_v2.kl:system/usr/keylayout/bcm_keypad_v2.kl \
- 	device/samsung/vivaltonfc3g/keylayouts/bcmpmu_on.kl:system/usr/keylayout/bcmpmu_on.kl \
- 	device/samsung/vivaltonfc3g/keylayouts/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
- 	device/samsung/vivaltonfc3g/keylayouts/ist30xx_ts_input.kl:system/usr/keylayout/ist30xx_ts_input.kl
+#device/samsung/vivaltonfc3g/keylayouts/bcm_headset.kl:system/usr/keylayout/bcm_headset.kl \
+#device/samsung/vivaltonfc3g/keylayouts/bcm_keypad_v2.kl:system/usr/keylayout/bcm_keypad_v2.kl \
+#device/samsung/vivaltonfc3g/keylayouts/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
+#device/samsung/vivaltonfc3g/keylayouts/samsung-keypad.kl:system/usr/keylayout/samsung-keypad.kl
+device/samsung/vivaltonfc3g/keylayouts/bcm_headset.kl:system/usr/keylayout/bcm_headset.kl \
+device/samsung/vivaltonfc3g/keylayouts/bcm_keypad_v2.kl:system/usr/keylayout/bcm_keypad_v2.kl \
+device/samsung/vivaltonfc3g/keylayouts/bcmpmu_on.kl:system/usr/keylayout/bcmpmu_on.kl \
+device/samsung/vivaltonfc3g/keylayouts/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
+device/samsung/vivaltonfc3g/keylayouts/ist30xx_ts_input.kl:system/usr/keylayout/ist30xx_ts_input.kl
 
 # Google's Software Decoder.
 PRODUCT_COPY_FILES += \
