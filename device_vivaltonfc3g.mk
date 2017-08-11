@@ -1,93 +1,103 @@
-# NO :
-#$(call inherit-product, device/common/gps/gps_us_supl.mk)
-#device/samsung/vivaltonfc3g/ramdisk/fstab.hawaii_ss_vivaltonfc3g:root/fstab.hawaii_ss_vivaltonfc3g \
-#device/samsung/vivaltonfc3g/ramdisk/init.hawaii_ss_vivaltonfc3g.rc:root/init.hawaii_ss_vivaltonfc3g.rc \
-#device/samsung/vivaltonfc3g/ramdisk/init.bcm2166x.usb.rc:root/init.bcm2166x.usb.rc \
-#device/samsung/vivaltonfc3g/ramdisk/init.log.rc:root/init.log.rc \
-#device/samsung/vivaltonfc3g/ramdisk/lpm.rc:root/lpm.rc \
-#device/samsung/vivaltonfc3g/ramdisk/ueventd.hawaii_ss_vivaltonfc3g.rc:root/ueventd.hawaii_ss_vivaltonfc3g.rc \
-#device/samsung/vivaltonfc3g/ramdisk/recovery/init.recovery.hawaii_ss_vivaltonfc3g.rc:root/init.recovery.hawaii_ss_vivaltonfc3g.rc
-#device/samsung/logan/configs/media_codecs.xml:system/etc/media_codecs.xml
-
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
-$(call inherit-product-if-exists, vendor/samsung/vivaltonfc3g/vivaltonfc3g-common-vendor.mk)
+# The gps config appropriate for this device
+$(call inherit-product, device/common/gps/gps_us_supl.mk)
 
+$(call inherit-product-if-exists, vendor/samsung/vivaltonfc3g/vivaltonfc3g-vendor.mk)
+
+# Use high-density artwork where available
 PRODUCT_LOCALES += hdpi
-PRODUCT_AAPT_CONFIG := normal hdpi xhdpi
+PRODUCT_AAPT_CONFIG := normal hdpi
 PRODUCT_AAPT_PREF_CONFIG := hdpi
 
 DEVICE_PACKAGE_OVERLAYS += device/samsung/vivaltonfc3g/overlay
 
 # Init files
 PRODUCT_COPY_FILES += \
-    device/samsung/vivaltonfc3g/rootdir/fstab.hawaii_ss_vivaltonfc3g:root/fstab.hawaii_ss_vivaltonfc3g \
-    device/samsung/vivaltonfc3g/rootdir/init.hawaii_ss_vivaltonfc3g.rc:root/init.hawaii_ss_vivaltonfc3g.rc \
-    device/samsung/vivaltonfc3g/rootdir/init.hawaii_ss_vivaltonfc3g_base.rc:root/init.hawaii_ss_vivaltonfc3g_base.rc \
-    device/samsung/vivaltonfc3g/rootdir/init.log.rc:root/init.log.rc \
-    #device/samsung/vivaltonfc3g/rootdir/init.rc:root/init.rc \
-    #device/samsung/vivaltonfc3g/rootdir/init.bcm2166x.usb.rc:root/init.bcm2166x.usb.rc \
-    device/samsung/vivaltonfc3g/rootdir/init.usb_hawaii_ss.rc:root/init.usb_hawaii_ss.rc \
-    device/samsung/vivaltonfc3g/rootdir/init.wifi.rc:root/init.wifi.rc \
-    device/samsung/vivaltonfc3g/rootdir/lpm.rc:root/lpm.rc \
-    #device/samsung/vivaltonfc3g/rootdir/ueventd.hawaii_ss_logan.rc:root/ueventd.hawaii_ss_logan.rc
-    device/samsung/vivaltonfc3g/rootdir/ueventd.hawaii_ss_vivaltonfc3g.rc:root/ueventd.hawaii_ss_vivaltonfc3g # .rc was cut off, because ueventd only checks for < 32 char long filenames..
+	device/samsung/vivaltonfc3g/ramdisk/fstab.hawaii_ss_vivaltonfc3g:root/fstab.hawaii_ss_vivaltonfc3g \
+	device/samsung/vivaltonfc3g/ramdisk/init.hawaii_ss_vivaltonfc3g.rc:root/init.hawaii_ss_vivaltonfc3g.rc \
+	device/samsung/vivaltonfc3g/ramdisk/init.hawaii_ss_vivaltonfc3g_base.rc:root/init.hawaii_ss_vivaltonfc3g_base.rc \
+	device/samsung/vivaltonfc3g/ramdisk/init.log.rc:root/init.log.rc \
+	device/samsung/vivaltonfc3g/ramdisk/init.rc:root/init.rc \
+	device/samsung/vivaltonfc3g/ramdisk/init.usb_hawaii_ss.rc:root/init.usb_hawaii_ss.rc \
+	device/samsung/vivaltonfc3g/ramdisk/init.wifi.rc:root/init.wifi.rc \
+	device/samsung/vivaltonfc3g/ramdisk/lpm.rc:root/lpm.rc \
+	device/samsung/vivaltonfc3g/ramdisk/ueventd.hawaii_ss_vivaltonfc3g.rc:root/ueventd.hawaii_ss_vivaltonfc3g # .rc was cut off, because ueventd only checks for < 32 char long filenames..
+
+# Media config
+PRODUCT_COPY_FILES += \
+	device/samsung/vivaltonfc3g/configs/media_profiles.xml:system/etc/media_profiles.xml \
+	device/samsung/vivaltonfc3g/configs/audio_policy.conf:system/etc/audio_policy.conf \
+	device/samsung/vivaltonfc3g/configs/media_codecs.xml:system/etc/media_codecs.xml \
+	frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml
+
+# Bluetooth config
+PRODUCT_COPY_FILES += \
+	device/samsung/vivaltonfc3g/configs/bluetooth/bt_did.conf:system/etc/bluetooth/bt_did.conf \
+	device/samsung/vivaltonfc3g/configs/bluetooth/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf
+
+# WiFi config
+PRODUCT_COPY_FILES += \
+	device/samsung/vivaltonfc3g/configs/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf \
+	device/samsung/vivaltonfc3g/configs/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf
 
 # Prebuilt kl keymaps
 PRODUCT_COPY_FILES += \
-    #device/samsung/vivaltonfc3g/keylayouts/bcm_headset.kl:system/usr/keylayout/bcm_headset.kl \
-    #device/samsung/vivaltonfc3g/keylayouts/bcm_keypad_v2.kl:system/usr/keylayout/bcm_keypad_v2.kl \
-    #device/samsung/vivaltonfc3g/keylayouts/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
-    #device/samsung/vivaltonfc3g/keylayouts/samsung-keypad.kl:system/usr/keylayout/samsung-keypad.kl
-    device/samsung/vivaltonfc3g/keylayouts/bcm_headset.kl:system/usr/keylayout/bcm_headset.kl \
-    device/samsung/vivaltonfc3g/keylayouts/bcm_keypad_v2.kl:system/usr/keylayout/bcm_keypad_v2.kl \
-    device/samsung/vivaltonfc3g/keylayouts/bcmpmu_on.kl:system/usr/keylayout/bcmpmu_on.kl \
-    device/samsung/vivaltonfc3g/keylayouts/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
-    device/samsung/vivaltonfc3g/keylayouts/ist30xx_ts_input.kl:system/usr/keylayout/ist30xx_ts_input.kl
+	device/samsung/vivaltonfc3g/keylayouts/bcm_headset.kl:system/usr/keylayout/bcm_headset.kl \
+	device/samsung/vivaltonfc3g/keylayouts/bcm_keypad_v2.kl:system/usr/keylayout/bcm_keypad_v2.kl \
+	device/samsung/vivaltonfc3g/keylayouts/bcmpmu_on.kl:system/usr/keylayout/bcmpmu_on.kl \
+	device/samsung/vivaltonfc3g/keylayouts/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
+	device/samsung/vivaltonfc3g/keylayouts/ist30xx_ts_input.kl:system/usr/keylayout/ist30xx_ts_input.kl
 
-# Google's Software Decoder.
-PRODUCT_COPY_FILES += \
-    frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
-    frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
-    frameworks/av/media/libstagefright/data/media_codecs_google_video_le.xml:system/etc/media_codecs_google_video_le.xml
-
-# Configs
-PRODUCT_COPY_FILES += \
-    device/samsung/logan/configs/media_codecs.xml:system/etc/media_codecs.xml
-
-# Insecure ADB
+# Insecure ADBD
+# (ro.adb.secure=3)
 ADDITIONAL_DEFAULT_PROPERTIES += \
-    ro.secure=0 \
-    ro.adb.secure=0 \
+	ro.adb.secure=0 \
+	persist.service.adb.enable=1
+
+# KSM
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.ksm.default=1  
+   
+# Wi-Fi
+PRODUCT_PACKAGES += \
+       dhcpcd.conf \
+       hostapd \
+       wpa_supplicant \
+       wpa_supplicant.conf     
+
+# Broadcom stuff
+#ADDITIONAL_DEFAULT_PROPERTIES += \
+#	persist.brcm.log=none \
+#	persist.brcm.cp_crash=none \
+#	persist.brcm.ap_crash=none \
+#	persist.brcm.force_ramdump=0 \
+#	persist.sys.usb.sport=1
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
-    make_ext4fs \
-    e2fsck \
-    setup_fs \
-    mkfs.f2fs \
-    fsck.f2fs \
-    fibmap.f2fs
-
-# GPS/RIL
+	setup_fs \
+	e2fsck \
+	f2fstat \
+	fsck.f2fs \
+	fibmap.f2fs \
+	mkfs.f2fs
+		
+# Usb accessory
 PRODUCT_PACKAGES += \
-    libstlport \
-    libglgps-compat
-
-# USB accessory
-PRODUCT_PACKAGES += \
-    com.android.future.usb.accessory
+	com.android.future.usb.accessory
 
 # Misc other modules
 PRODUCT_PACKAGES += \
-    audio.a2dp.default \
-    audio.usb.default \
-    audio.r_submix.default \
-    audio.primary.default \
-    libaudio-resampler \
-    lights.hawaii \
-    power.hawaii \
-    libstagefrighthw
+	audio.a2dp.default \
+	audio.primary.default \
+	audio.r_submix.default \
+	audio.usb.default \
+	libnetcmdiface \
+	libstagefrighthw \
+	lights.hawaii 
 
 # Device-specific packages
 PRODUCT_PACKAGES += \
@@ -116,43 +126,14 @@ PRODUCT_COPY_FILES += \
     device/samsung/vivaltonfc3g/nfc/libnfc-brcm-20795a10.conf:system/etc/libnfc-brcm-20795a10.conf \
     device/samsung/vivaltonfc3g/nfc/libnfc-sec.conf:system/etc/libnfc-sec.conf
 
-# Media
-PRODUCT_PROPERTY_OVERRIDES += \
-    media.stagefright.legacyencoder=true \
-    media.stagefright.less-secure=true
-
-# IPv6 tethering
-PRODUCT_PACKAGES += \
-    ebtables \
-    ethertypes
-
-# Gello Browser
-PRODUCT_PACKAGES += \
-    Gello
-
-# Widevine
-PRODUCT_PACKAGES += \
-    libshim_wvm
-    
-# KSM
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.ksm.default=1
-
-# Disable sending usage data
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.config.nocheckin=1
-
-# Wi-Fi
-PRODUCT_PACKAGES += \
-    macloader \
-    hostapd \
-    libnetcmdiface \
-    wpa_supplicant \
-    wpa_supplicant.conf
+# Charger
+#PRODUCT_PACKAGES += \
+#	charger \
+#	charger_res_images
 
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
-        frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
+	frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
 	frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml \
 	frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
 	frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
@@ -173,43 +154,27 @@ PRODUCT_COPY_FILES += \
 
 # These are the hardware-specific settings that are stored in system properties.
 # Note that the only such settings should be the ones that are too low-level to
-# be reachable from resources or other mechanisms
+# be reachable from resources or other mechanisms.
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0 \
     mobiledata.interfaces=rmnet0 \
     ro.telephony.ril_class=SamsungBCMRIL \
     persist.radio.multisim.config=none \
-    ro.multisim.simslotcount=1 \
+    ro.cm.hardware.cabc=/sys/class/mdnie/mdnie/cabc \
     ro.telephony.call_ring.multiple=0 \
     camera2.portability.force_api=1 \
     ro.telephony.call_ring=0
 
-# Enable Google-specific location features,
-# like NetworkLocationProvider and LocationCollector
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.com.google.locationfeatures=1 \
-    ro.com.google.networklocation=1
-
-# Extended JNI checks:
-# The extended JNI checks will cause the system to run more slowly, but they can spot a variety of nasty bugs 
-# before they have a chance to cause problems.
-# Default=true for development builds, set by android buildsystem
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.kernel.android.checkjni=0 \
-    ro.kernel.checkjni=0 \
-    dalvik.vm.checkjni=false
-
-# Dex2Oat multi-thread
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sys.fw.dex2oat_thread_count=2
+# MTP
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    persist.sys.usb.config=mtp
 
 # Dalvik heap config
+#include frameworks/native/build/phone-hdpi-512-dalvik-heap.mk
 include frameworks/native/build/phone-hdpi-512-dalvik-heap.mk
-
-# Texture config.
 include frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk
 
-$(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/config/config-bcm.mk)
+$(call inherit-product, hardware/broadcom/wlan/bcmdhd/config/config-bcm.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
