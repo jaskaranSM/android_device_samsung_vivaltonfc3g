@@ -54,9 +54,9 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE          := 2424307712
 BOARD_CACHEIMAGE_PARTITION_SIZE             := 209715200
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE           := ext4
 # Vivaltonfc3g needs this in the boot image
-#BOARD_MKBOOTIMG_ARGS := --second $(OUT)/obj/KERNEL_OBJ/arch/arm/boot/dts/hawaii_ss_vivaltonfc3g_rev00.dtb
+BOARD_MKBOOTIMG_ARGS := --second $(OUT)/obj/KERNEL_OBJ/arch/arm/boot/dts/hawaii_ss_vivaltonfc3g_rev00.dtb
 # Use this if you use a prebuilt kernel
-BOARD_MKBOOTIMG_ARGS := --second device/samsung/vivaltonfc3g/second.bin
+#BOARD_MKBOOTIMG_ARGS := --second device/samsung/vivaltonfc3g/second.bin
 BOARD_FLASH_BLOCK_SIZE                      := 262144
 
 # Bluetooth
