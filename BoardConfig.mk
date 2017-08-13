@@ -22,7 +22,7 @@ TARGET_OTA_ASSERT_DEVICE := vivaltonfc3g,G313HN,SM-G313HN,hawaii
 # Kernel
 BOARD_KERNEL_BASE := 0x81e00000
 BOARD_KERNEL_PAGESIZE := 4096
-TARGET_KERNEL_CONFIG := bcm21664_hawaii_ss_vivaltonfc3g_rev00_cm_defconfig
+TARGET_KERNEL_CONFIG := bcm21664_hawaii_ss_vivaltonfc3g_rev00_lineage_defconfig
 TARGET_KERNEL_SOURCE := ../kernel/samsung/hawaii
 
 # PARTITION SIZE
