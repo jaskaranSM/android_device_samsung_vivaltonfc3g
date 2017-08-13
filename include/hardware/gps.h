@@ -885,26 +885,7 @@ typedef struct {
  * Represents the status of AGPS augmented to support IPv4 and IPv6.
  */
 typedef struct {
-    /** set to sizeof(AGpsStatus_v1) */
-    size_t          size;
-
-    AGpsType        type;
-    AGpsStatusValue status;
-} AGpsStatus_v1;
-
-/** Represents the status of AGPS augmented with a IPv4 address field. */
-typedef struct {
-    /** set to sizeof(AGpsStatus_v2) */
-     size_t          size;
- 
-     AGpsType        type;
-     AGpsStatusValue status;
-     uint32_t        ipaddr;
-    } AGpsStatus_v2;
-
-/* Represents the status of AGPS augmented to support IPv4 and IPv6. */
-typedef struct {
-    /** set to sizeof(AGpsStatus_v3) */
+    /** set to sizeof(AGpsStatus) */
     size_t                  size;
 
     AGpsType                type;
@@ -919,13 +900,10 @@ typedef struct {
     /**
      * Must contain the IPv4 (AF_INET) or IPv6 (AF_INET6) address to report.
      * Any other value of addr.ss_family will be rejected.
-     * */
+     */
     struct sockaddr_storage addr;
-} AGpsStatus_v3;
+} AGpsStatus;
 
-typedef AGpsStatus_v3     AGpsStatus;
-    
-    
 /**
  * Callback with AGPS status information. Can only be called from a thread
  * created by create_thread_cb.
@@ -943,7 +921,7 @@ typedef struct {
  * extra APN data.
  */
 typedef struct {
-    /** set to sizeof(AGpsInterface_v1) */
+    /** set to sizeof(AGpsInterface) */
     size_t size;
 
     /**
@@ -977,117 +955,7 @@ typedef struct {
     int (*data_conn_open_with_apn_ip_type)(
             const char* apn,
             ApnIpType apnIpType);
-} AGpsInterface_v1;
-
-/**
- * Extended interface for AGPS support, it is augmented to enable to pass
- * extra APN data.
- */
-typedef struct {
-    /** set to sizeof(AGpsInterface_v2) */
-    size_t size;
-
-    /**
-     * Opens the AGPS interface and provides the callback routines to the
-     * implementation of this interface.
-     */
-    void (*init)(AGpsCallbacks* callbacks);
-    /**
-     * Deprecated.
-     * If the HAL supports AGpsInterface_v2 this API will not be used, see
-     * data_conn_open_with_apn_ip_type for more information.
-     */
-    int (*data_conn_open)(const char* apn);
-    /**
-     * Notifies that the AGPS data connection has been closed.
-     */
-    int (*data_conn_closed)();
-    /**
-     * Notifies that a data connection is not available for AGPS.
-     */
-    int (*data_conn_failed)();
-    /**
-     * Sets the hostname and port for the AGPS server.
-     */
-    int (*set_server)(AGpsType type, const char* hostname, int port);
-
-    /**
-     * Notifies that a data connection is available and sets the name of the
-     * APN, and its IP type, to be used for SUPL connections.
-     */
-    int (*data_conn_open_with_apn_ip_type)(
-            const char* apn,
-            ApnIpType apnIpType);
-} AGpsInterface_v2;
-
-typedef AGpsInterface_v2    AGpsInterface;
-
-/** Error codes associated with certificate operations */
-#define AGPS_CERTIFICATE_OPERATION_SUCCESS               0
-#define AGPS_CERTIFICATE_ERROR_GENERIC                -100
-#define AGPS_CERTIFICATE_ERROR_TOO_MANY_CERTIFICATES  -101
-
-/** A data structure that represents an X.509 certificate using DER encoding */
-typedef struct {
-    size_t  length;
-    u_char* data;
-} DerEncodedCertificate;
-
-/**
- * A type definition for SHA1 Fingerprints used to identify X.509 Certificates
- * The Fingerprint is a digest of the DER Certificate that uniquely identifies it.
- */
-typedef struct {
-    u_char data[20];
-} Sha1CertificateFingerprint;
-
-/** AGPS Interface to handle SUPL certificate operations */
-typedef struct {
-    /** set to sizeof(SuplCertificateInterface) */
-    size_t size;
-    
-    /**
-     * Installs a set of Certificates used for SUPL connections to the AGPS server.
-     * If needed the HAL should find out internally any certificates that need to be removed to
-     * accommodate the certificates to install.
-     * The certificates installed represent a full set of valid certificates needed to connect to
-     * AGPS SUPL servers.
-     * The list of certificates is required, and all must be available at the same time, when trying
-     * to establish a connection with the AGPS Server.
-     *
-     * Parameters:
-     *      certificates - A pointer to an array of DER encoded certificates that are need to be
-     *                     installed in the HAL.
-     *      length - The number of certificates to install.
-     * Returns:
-     *      AGPS_CERTIFICATE_OPERATION_SUCCESS if the operation is completed successfully
-     *      AGPS_CERTIFICATE_ERROR_TOO_MANY_CERTIFICATES if the HAL cannot store the number of
-     *          certificates attempted to be installed, the state of the certificates stored should
-     *          remain the same as before on this error case.
-     *
-     * IMPORTANT:
-     *      If needed the HAL should find out internally the set of certificates that need to be
-     *      removed to accommodate the certificates to install.
-     */
-    int  (*install_certificates) ( const DerEncodedCertificate* certificates, size_t length );
-
-    /**
-     * Notifies the HAL that a list of certificates used for SUPL connections are revoked. It is
-     * expected that the given set of certificates is removed from the internal store of the HAL.
-     *
-     * Parameters:
-     *      fingerprints - A pointer to an array of SHA1 Fingerprints to identify the set of
-     *                     certificates to revoke.
-     *      length - The number of fingerprints provided.
-     * Returns:
-     *      AGPS_CERTIFICATE_OPERATION_SUCCESS if the operation is completed successfully.
-     *
-     * IMPORTANT:
-     *      If any of the certificates provided (through its fingerprint) is not known by the HAL,
-     *      it should be ignored and continue revoking/deleting the rest of them.
-     */
-    int  (*revoke_certificates) ( const Sha1CertificateFingerprint* fingerprints, size_t length );
-} SuplCertificateInterface;
+} AGpsInterface;
 
 /** Error codes associated with certificate operations */
 #define AGPS_CERTIFICATE_OPERATION_SUCCESS               0
