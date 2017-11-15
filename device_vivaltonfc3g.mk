@@ -14,15 +14,15 @@ DEVICE_PACKAGE_OVERLAYS += device/samsung/vivaltonfc3g/overlay
 
 # Init files
 PRODUCT_COPY_FILES += \
-	device/samsung/vivaltonfc3g/ramdisk/fstab.hawaii_ss_vivaltonfc3g:root/fstab.hawaii_ss_vivaltonfc3g \
-	device/samsung/vivaltonfc3g/ramdisk/init.hawaii_ss_vivaltonfc3g.rc:root/init.hawaii_ss_vivaltonfc3g.rc \
-	device/samsung/vivaltonfc3g/ramdisk/init.hawaii_ss_vivaltonfc3g_base.rc:root/init.hawaii_ss_vivaltonfc3g_base.rc \
-	device/samsung/vivaltonfc3g/ramdisk/init.log.rc:root/init.log.rc \
-	device/samsung/vivaltonfc3g/ramdisk/init.rc:root/init.rc \
-	device/samsung/vivaltonfc3g/ramdisk/init.usb_hawaii_ss.rc:root/init.usb_hawaii_ss.rc \
-	device/samsung/vivaltonfc3g/ramdisk/init.wifi.rc:root/init.wifi.rc \
-	device/samsung/vivaltonfc3g/ramdisk/lpm.rc:root/lpm.rc \
-	device/samsung/vivaltonfc3g/ramdisk/ueventd.hawaii_ss_vivaltonfc3g.rc:root/ueventd.hawaii_ss_vivaltonfc3g # .rc was cut off, because ueventd only checks for < 32 char long filenames..
+	device/samsung/vivaltonfc3g/rootdir/fstab.hawaii_ss_vivaltonfc3g:root/fstab.hawaii_ss_vivaltonfc3g \
+	device/samsung/vivaltonfc3g/rootdir/init.hawaii_ss_vivaltonfc3g.rc:root/init.hawaii_ss_vivaltonfc3g.rc \
+	device/samsung/vivaltonfc3g/rootdir/init.hawaii_ss_vivaltonfc3g_base.rc:root/init.hawaii_ss_vivaltonfc3g_base.rc \
+	device/samsung/vivaltonfc3g/rootdir/init.log.rc:root/init.log.rc \
+	device/samsung/vivaltonfc3g/rootdir/init.rc:root/init.rc \
+	device/samsung/vivaltonfc3g/rootdir/init.usb_hawaii_ss.rc:root/init.usb_hawaii_ss.rc \
+	device/samsung/vivaltonfc3g/rootdir/init.wifi.rc:root/init.wifi.rc \
+	device/samsung/vivaltonfc3g/rootdir/lpm.rc:root/lpm.rc \
+	device/samsung/vivaltonfc3g/rootdir/ueventd.hawaii_ss_vivaltonfc3g.rc:root/ueventd.hawaii_ss_vivaltonfc3g # .rc was cut off, because ueventd only checks for < 32 char long filenames..
 
 # Media config
 PRODUCT_COPY_FILES += \

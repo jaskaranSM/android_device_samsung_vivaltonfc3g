@@ -1,5 +1,5 @@
 #
-# vivaltonfc3g (SM-G313HN)
+# VIVALTONFC3G (SM-G313HN)
 #
 
 persist.brcm.log=none
@@ -8,9 +8,15 @@ persist.brcm.ap_crash=none
 
 rild.libpath=/system/lib/libbrcm_ril.so
 #rild.libargs=-d /dev/ttyS0
+ro.ril.multi_rat_capable=false
+persist.radio.flexmap_type=nw_mode
 ro.sf.lcd_density=240
 ro.lcd_brightness=160
-ro.lcd_min_brightness=20
+ro.lcd_min_brightness=18
+
+#Simulate sdcard on /data/media
+#
+persist.fuse_sdcard=true
 
 #Simulate sdcard on /data/media
 #
@@ -37,3 +43,8 @@ video.enc.h264.timing_thr2=145
 ro.ril.hsxpa=1
 ro.ril.gprsclass=10
 ro.com.google.gmsversion=4.4_r5
+
+ro.config.max_starting_bg=8
+dalvik.vm.dex2oat-swap=false
+dalvik.vm.dex2oat-flags=--no-watch-dog
+ro.sys.fw.dex2oat_thread_count=4

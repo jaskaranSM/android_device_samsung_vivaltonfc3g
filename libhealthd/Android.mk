@@ -1,5 +1,5 @@
-# Copyright (C) 2013 The Android Open Source Project
-# Copyright (C) 2013 The CyanogenMod Project
+# Copyright (C) 2016 The Android Open Source Project
+# Copyright (C) 2016 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,18 +15,9 @@
 
 LOCAL_PATH := $(call my-dir)
 
-# HAL module implementation, not prelinked and stored in
-# hw/<LIGHTS_HARDWARE_MODULE_ID>.<ro.hardware>.so
 include $(CLEAR_VARS)
-
-LOCAL_SRC_FILES := lights.c
-
-LOCAL_PRELINK_MODULE := false
-LOCAL_MODULE_PATH := $(TARGET_OUT_SHARED_LIBRARIES)/hw
-
-LOCAL_SHARED_LIBRARIES := liblog
-
-LOCAL_MODULE := lights.$(TARGET_BOARD_PLATFORM)
+LOCAL_SRC_FILES := healthd-hawaii.cpp
+LOCAL_MODULE := libhealthd-vivaltonfc3g.hawaii
 LOCAL_MODULE_TAGS := optional
-
-include $(BUILD_SHARED_LIBRARY)
+LOCAL_STATIC_LIBRARIES := libhealthd.default
+include $(BUILD_STATIC_LIBRARY)
