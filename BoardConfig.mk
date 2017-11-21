@@ -33,7 +33,7 @@ ifeq ($(BUILD_TWRP),true)
 else
     TARGET_KERNEL_CONFIG                    := bcm21664_hawaii_ss_vivaltonfc3g_rev00_lineage_defconfig
 endif
-TARGET_KERNEL_SOURCE                        := kernel/samsung/vivaltonfc3g
+TARGET_KERNEL_SOURCE                        := kernel/samsung/hawaii
 
 # Kernel toolchain
 KERNEL_TOOLCHAIN                            := $(ANDROID_BUILD_TOP)/prebuilts/gcc/linux-x86/arm/arm-eabi-4.7/bin
