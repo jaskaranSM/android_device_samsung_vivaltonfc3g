@@ -36,7 +36,7 @@ endif
 TARGET_KERNEL_SOURCE                        := kernel/samsung/hawaii
 
 # Kernel toolchain
-KERNEL_TOOLCHAIN                            := $(ANDROID_BUILD_TOP)/prebuilts/gcc/linux-x86/arm/arm-eabi-4.7/bin
+KERNEL_TOOLCHAIN                            := $(ANDROID_BUILD_TOP)/prebuilts/gcc/linux-x86/arm/arm-eabi-4.8/bin
 KERNEL_TOOLCHAIN_PREFIX                     := arm-eabi-
 
 # Extended filesystem support
